@@ -1,0 +1,11 @@
+Model Information:
+* title:	Honda civic
+* source:	https://sketchfab.com/3d-models/honda-civic-ff844e296f214e709c0d0691d031c68b
+* author:	Aldios (https://sketchfab.com/Aldios)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Honda civic" (https://sketchfab.com/3d-models/honda-civic-ff844e296f214e709c0d0691d031c68b) by Aldios (https://sketchfab.com/Aldios) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

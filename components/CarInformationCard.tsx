@@ -1,6 +1,6 @@
 "use client";
 import { Tab } from "@headlessui/react";
-import React from "react";
+import React, { Fragment } from "react";
 
 function CarInformationCard() {
   const car = {
@@ -15,16 +15,31 @@ function CarInformationCard() {
   };
   return (
     <div className="flex flex-col gap-5 ">
-      <span className="font-bold text-3xl">{`${car.brand} ${car.model}`}</span>
+      <span className="font-bold text-center md:text-left text-3xl">{`${car.brand} ${car.model}`}</span>
       <div className="shadow-lg">
         <Tab.Group>
           <Tab.List className="flex flex-row justify-start">
-            <Tab className="w-full rounded-lg py-2.5 text-sm font-medium leading-5  ring-yellow ring-opacity-60 ring-offset-2 ring-offset-yellow-300 focus:outline-none focus:ring-2">
-              Description
+            <Tab as={Fragment}>
+              {({ selected }) => (
+                <div
+                  className={`w-full rounded-lg text-center py-2.5 text-sm font-medium  ${
+                    selected ? "text-white bg-yellow-400" : "text-slate-600"
+                  }`}
+                >
+                  Description
+                </div>
+              )}
             </Tab>
-            <div className=" h-10 min-h-[2.5rem] w-2 bg-yellow-400" />
-            <Tab className="w-full rounded-lg py-2.5 text-sm font-medium leading-5  ring-yellow ring-opacity-60 ring-offset-2 ring-offset-yellow-300 focus:outline-none focus:ring-2">
-              Specifications
+            <Tab as={Fragment}>
+              {({ selected }) => (
+                <div
+                  className={`w-full rounded-lg text-center py-2.5 text-sm font-medium  ${
+                    selected ? "text-white bg-yellow-400" : "text-slate-600"
+                  }`}
+                >
+                  Specifications
+                </div>
+              )}
             </Tab>
           </Tab.List>
           <Tab.Panels>

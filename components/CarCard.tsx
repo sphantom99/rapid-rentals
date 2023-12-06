@@ -3,16 +3,9 @@ import Image from "next/image";
 import React, { Fragment, useState /*,{ useState }*/ } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
+import { Car } from "@/lib/types";
 type CardCardProps = {
-  car: {
-    model: string;
-    brand: string;
-    fuel: string;
-    drive: string;
-    mpg: string;
-    gears: string;
-    description: string;
-  };
+  car: Car;
 };
 
 const CarCard = ({ car }: CardCardProps) => {
@@ -42,7 +35,7 @@ const CarCard = ({ car }: CardCardProps) => {
         <div>27.000&euro;</div>
         <Image
           alt="image of car"
-          src={`/cars/${model}2.png`}
+          src={`/carPngs/${brand}-${model}.png`}
           width={300}
           height={300}
         />
@@ -77,7 +70,7 @@ const CarCard = ({ car }: CardCardProps) => {
         </div>
       </div>
       <Transition show={open} as={Fragment}>
-        <Dialog className=" reltive z-50" onClose={() => setOpen(false)}>
+        <Dialog className=" relative z-50" onClose={() => setOpen(false)}>
           <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
           <div className="fixed inset-0 w-screen overflow-y-auto">
             <div className="flex items-center justify-center p-4">
@@ -90,7 +83,7 @@ const CarCard = ({ car }: CardCardProps) => {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
               >
-                <Dialog.Panel className=" flex flex-col justify-center items-center gap-5 mx-auto max-w-lg rounded bg-white p-4 text-black">
+                <Dialog.Panel className=" mt-20 z-50 flex flex-col justify-center items-center gap-5 mx-auto max-w-lg rounded overflow-y-scroll bg-white p-4 text-black">
                   <div className="flex flex-row justify-between w-full">
                     <Dialog.Title className=" text-center  font-bold text-lg">{`${brand} ${model}`}</Dialog.Title>
                     <button onClick={() => setOpen(false)}>
@@ -105,13 +98,16 @@ const CarCard = ({ car }: CardCardProps) => {
 
                   <Image
                     alt="image of car"
-                    src={`/cars/${model}2.png`}
+                    src={`/carPngs/${brand}-${model}.png`}
                     width={300}
                     height={300}
                   />
 
                   <Dialog.Description className="flex flex-col gap-5">
-                    <p lang="en" className="break-words hyphens-auto">
+                    <p
+                      lang="en"
+                      className="break-words hyphens-auto line-clamp-3"
+                    >
                       {description}
                     </p>
                     <ul className=" flex flex-col">

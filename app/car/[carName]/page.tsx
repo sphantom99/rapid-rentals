@@ -1,20 +1,19 @@
 // "use client";
 // import CarInformationCard from "@/components/CarInformationCard";
+import CarInformationCard from "@/components/CarInformationCard";
 import { CarModel } from "@/components/CarModel";
 import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
-const CarInformationCard = dynamic(
-  () => import("@/components/CarInformationCard"),
-  { ssr: false }
-);
-function page() {
+
+function page({ params }: { params: { carName: string } }) {
+  console.log(params);
   return (
-    <div className="flex flex-col gap-5 p-5 justify-center w-11/12 min-h-screen h-screen m-auto">
-      <div>
-        <CarModel />
+    <div className="flex flex-wrap lg:flex-nowrap gap-8 p-1 md:p-5 justify-center  m-auto items-center">
+      <div className=" w-[90vw] h-[50dvh]">
+        <CarModel carName={params.carName} />
       </div>
       {/* <div>Car Model</div> */}
-      <div>
+      <div className="w-5/6">
         <CarInformationCard />
       </div>
     </div>

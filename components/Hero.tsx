@@ -3,7 +3,7 @@ import React from "react";
 
 function Hero() {
   return (
-    <section className="flex flex-col scroll-smooth  p-4 md:p-12 overflow-visible h-screen justify-around">
+    <section className="flex flex-col scroll-smooth  px-4 md:px-12 overflow-visible min-h-full h-screen justify-around">
       <div className="flex flex-col justify-start gap-6 p-8">
         <h1 className="font-bold text-xl md:text-3xl ">
           Own the car of your dreams in just a few clicks!

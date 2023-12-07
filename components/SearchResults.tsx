@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CarCard from "./CarCard";
-
-
+import { Car } from "@/lib/types";
+import { WithId } from "mongodb";
 
 type TSearchResultsProps = {
   cars: Car[];

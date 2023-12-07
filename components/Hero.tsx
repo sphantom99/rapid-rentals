@@ -1,16 +1,24 @@
+import { auth } from "@/auth";
 import Image from "next/image";
 import React from "react";
 
-function Hero() {
+async function Hero() {
+  const session = await auth();
   return (
-    <section className="flex flex-col scroll-smooth  px-4 md:px-12 overflow-visible min-h-full h-screen justify-around">
+    <section className="flex flex-col scroll-smooth mt-10  px-4 md:px-12 overflow-visible min-h-full h-screen justify-around">
       <div className="flex flex-col justify-start gap-6 p-8">
         <h1 className="font-bold text-xl md:text-3xl ">
-          Own the car of your dreams in just a few clicks!
+          {`Welcome`}{" "}
+          <span className="bg-yellow-300 bg-clip-text text-transparent text-4xl">
+            {" "}
+            {`${session?.user?.name?.split(" ")[0]}`}
+          </span>
+          <br /> Rent the car of your dreams in just a few clicks!
         </h1>
-        <h2 className="text-xs md:text-lg text-slate-400 ">
-          Streamline your car purchasing experience with our top of the line
-          customer service and huge catalogue
+        <h2 className="text-md md:text-lg text-slate-400 md:w-3/5 ">
+          Experience unparalleled luxury and style with our premium car rental
+          services. Elevate your journey with our fleet of exquisite vehicles,
+          delivering the epitome of sophistication and performance.
         </h2>
         <a
           href="#carCatalogue"

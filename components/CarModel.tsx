@@ -6,6 +6,7 @@ import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Mesh } from "three";
 import { useRouter } from "next/router";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
 type TCarModelProps = {
   carName: string;
@@ -13,9 +14,10 @@ type TCarModelProps = {
 export function CarModel(props: TCarModelProps) {
   const { carName } = props;
   function MeshComponent() {
-    const fileUrl = `/models/${carName}.gltf`;
+    const fileUrl = "/models/Honda-Civic.gltf"; //`/models/${carName}.gltf`;
     const mesh = useRef<Mesh>(null!);
     const gltf = useLoader(GLTFLoader, fileUrl);
+    // const obj = useLoader(OBJLoader, fileUrl);
 
     //   useFrame(() => {
     //     mesh.current.rotation.y += 0.01;
@@ -34,7 +36,7 @@ export function CarModel(props: TCarModelProps) {
     >
       <OrbitControls />
       <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <pointLight position={[10, 10, 100]} />
       <MeshComponent />
     </Canvas>
   );

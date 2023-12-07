@@ -14,7 +14,7 @@ export default async function CarCatalogue() {
         <h2 className="text-slate-400">Explore cars you might like</h2>
       </div>
       <SearchBar />
-      <SearchResults cars={allCars} />
+      <SearchResults cars={allCars ?? []} />
     </section>
   );
 }

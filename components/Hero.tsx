@@ -8,11 +8,14 @@ async function Hero() {
     <section className="flex flex-col scroll-smooth mt-10  px-4 md:px-12 overflow-visible min-h-full h-screen justify-around">
       <div className="flex flex-col justify-start gap-6 p-8">
         <h1 className="font-bold text-xl md:text-3xl ">
-          {`Welcome`}{" "}
-          <span className="bg-yellow-300 bg-clip-text text-transparent text-4xl">
-            {" "}
-            {`${session?.user?.name?.split(" ")[0]}`}
-          </span>
+          {session ? (
+            <>
+              Welcome{" "}
+              <span className="bg-yellow-300 bg-clip-text text-transparent text-4xl">
+                {`${session?.user?.name?.split(" ")[0]}`}
+              </span>
+            </>
+          ) : null}
           <br /> Rent the car of your dreams in just a few clicks!
         </h1>
         <h2 className="text-md md:text-lg text-slate-400 md:w-3/5 ">

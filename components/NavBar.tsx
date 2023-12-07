@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Avatar from "./Avatar";
-import ScrollCar from "./scrollCar";
+import ScrollCar from "./ScrollCar";
 
 async function NavBar() {
-
   return (
     <nav className=" top-0 w-full fixed z-20 bg-white pb-4 ">
       <div className="flex flex-row w-full justify-between p-4 px-8 items-center">

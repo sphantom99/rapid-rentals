@@ -3,18 +3,37 @@
 import { Car } from "@/lib/types";
 import { MongoClient } from "mongodb";
 
+export async function getAllCarBrands() {
+  const client = new MongoClient(process.env.MONGO_URI ?? "");
 
-export async function getAllCars() {
   try {
-    const client = new MongoClient(process.env.MONGO_URI ?? "");
     await client.connect();
     const db = await client.db("RapidRentals");
     const cars = await db.collection<Car>("Cars");
     const result = await cars.find({});
     const resultArray = await result.toArray();
-    console.log(resultArray);
+    return resultArray
+      ?.map((car) => car.brand)
+      .filter((value, index, array) => array.indexOf(value) === index);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    client.close();
+  }
+}
+export async function getAllCars() {
+  const client = new MongoClient(process.env.MONGO_URI ?? "");
+
+  try {
+    await client.connect();
+    const db = await client.db("RapidRentals");
+    const cars = await db.collection<Car>("Cars");
+    const result = await cars.find({}).limit(5);
+    const resultArray = await result.toArray();
     return resultArray;
   } catch (error) {
     console.log(error);
+  } finally {
+    client.close();
   }
 }

@@ -11,14 +11,15 @@ type TCarCatalogueMainSectionProps = {
 function CarCatalogueMainSection(props: TCarCatalogueMainSectionProps) {
   const { cars, allCarBrands } = props;
   const [searchedCarResults, setSearchedCarResults] = useState(cars);
-
+  const [loading, setLoading] = useState(false);
   return (
     <section>
       <SearchBar
+        setLoading={setLoading}
         setResults={setSearchedCarResults}
         carBrands={allCarBrands ?? []}
       />
-      <SearchResults cars={searchedCarResults} />
+      <SearchResults loading={loading} cars={searchedCarResults} />
     </section>
   );
 }

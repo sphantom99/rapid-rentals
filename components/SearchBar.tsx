@@ -8,9 +8,10 @@ import { Car } from "@/lib/types";
 type TSearchBarProps = {
   carBrands: string[];
   setResults: React.Dispatch<React.SetStateAction<Car[]>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 function SearchBar(props: TSearchBarProps) {
-  const { carBrands, setResults } = props;
+  const { carBrands, setResults, setLoading } = props;
   const [query, setQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = React.useState<string[]>([]);
   const [model, setModel] = useState("");
@@ -25,6 +26,7 @@ function SearchBar(props: TSearchBarProps) {
   const handleSearch = async () => {
     if (selectedBrand.length > 0 || model !== "") {
       try {
+        setLoading(true);
         const res = await fetch(
           `/api/search?${
             selectedBrand.length > 0 ? `brand=${selectedBrand?.join(",")}` : ""
@@ -34,6 +36,7 @@ function SearchBar(props: TSearchBarProps) {
         );
         const data = await res.json();
         setResults(data);
+        setLoading(false);
       } catch {
         (error: Error) => console.log(error);
       }

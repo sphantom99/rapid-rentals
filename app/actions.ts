@@ -16,7 +16,7 @@ export async function getAllCarBrands() {
       ?.map((car) => car.brand)
       .filter((value, index, array) => array.indexOf(value) === index);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   } finally {
     client.close();
   }
@@ -32,7 +32,7 @@ export async function getAllCars() {
     const resultArray = await result.toArray();
     return resultArray;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   } finally {
     client.close();
   }
@@ -49,7 +49,7 @@ export async function getAllUserRentings(userId: string) {
     const resultArray = await result.toArray();
     return resultArray;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   } finally {
     client.close();
   }
@@ -62,13 +62,10 @@ export async function createRenting(renting: Omit<Renting, "_id">) {
     await client.connect();
     const db = await client.db("RapidRentals");
     const rentings = await db.collection<Omit<Renting, "_id">>("Rentings");
-    console.log(renting);
     const res = await rentings.insertOne(renting);
-    console.log(res);
-
     return res;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   } finally {
     client.close();
   }

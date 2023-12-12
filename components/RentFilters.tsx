@@ -46,7 +46,6 @@ function RentFilters(props: TRentFiltersProps) {
         userId: user?.id,
       };
       const res = await createRenting(renting);
-      console.log(res);
       // throw new Error("oops");
       toast.success("Conrgatulations!\n Your Reservation has been created!", {
         theme: "colored",

@@ -19,13 +19,11 @@ export const { handlers, auth } = NextAuth({
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
-      console.log("urls", url, baseUrl);
-      return "http://localhost:3000";
-      // if (url.startsWith("/")) return `${baseUrl}${url}`;
+      if (url.startsWith("/")) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin
-      //  return url;
-      // return baseUrl;
-    },
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    }
   },
   events: {
     createUser: async ({ user }) => {

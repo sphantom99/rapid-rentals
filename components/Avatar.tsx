@@ -1,16 +1,16 @@
 "use client";
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { Menu } from "@headlessui/react";
 import { Session } from "next-auth";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type TAvatarProps = {
   session: Session | null;
 };
 function Avatar(props: TAvatarProps) {
+  const path = usePathname();
   const { session } = props;
-  console.log(session);
 
   return (
     <>
@@ -65,7 +65,7 @@ function Avatar(props: TAvatarProps) {
           </Menu>
         </div>
       ) : (
-        <Link href="/api/auth/signin">Sign in</Link>
+        <Link href={`/api/auth/signin?callbackUrl=${path}`}>Sign in</Link>
       )}
     </>
   );

@@ -12,16 +12,16 @@ const CarCard = ({ car }: CardCardProps) => {
   const [open, setOpen] = useState(false);
 
   function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>): any {
-    console.log("Clicked");
     setOpen(true);
   }
 
   const { brand, model, fuel, drive, mpg, gears, description } = car;
+  const price = Math.floor((11000 / parseInt(mpg)) * 1.4 + 25);
   return (
     <>
       <div
         onClick={handleClick}
-        className="flex flex-col bg-slate-100 pt-4 pb-8 px-8 rounded-lg hover:cursor-pointer hover:bg-yellow-300 hover:text-white gap-4"
+        className="flex flex-col bg-slate-100 pt-4 pb-8 px-8 rounded-lg hover:cursor-pointer hover:bg-yellow-300 hover:text-white gap-4 justify-between"
       >
         <div className="flex flex-row justify-between items-center">
           <span className="font-bold text-lg">{`${brand} ${model}`}</span>
@@ -32,7 +32,7 @@ const CarCard = ({ car }: CardCardProps) => {
             height={50}
           />
         </div>
-        <div>27.000&euro;</div>
+        <div className=" font-semibold">{price}&euro;/week</div>
         <Image
           alt="image of car"
           src={`/carPngs/${brand}-${model}.png`}

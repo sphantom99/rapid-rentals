@@ -12,23 +12,20 @@ import React, { Suspense } from "react";
 async function getCarInfo(brand: string, model: string) {
   const client = new MongoClient(process.env.MONGO_URI ?? "");
   try {
-    console.log(model, brand);
     await client.connect();
     const db = await client.db("RapidRentals");
     const cars = await db.collection<Car>("Cars");
     const result = await cars.findOne<Car>({ model: model, brand: brand });
 
-    console.log(result);
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   } finally {
     client.close();
   }
 }
 
 async function page({ params }: { params: { carName: string } }) {
-  console.log(params);
 
   const carInfo = await getCarInfo(
     params.carName.split("-")[0],

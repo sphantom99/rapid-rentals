@@ -18,7 +18,6 @@ function SearchBar(props: TSearchBarProps) {
   const filteredBrands = carBrands.filter((brand) => {
     return brand.toLowerCase().includes(query.toLowerCase());
   });
-  console.log(carBrands);
 
   const handleChangeModel = (e: React.ChangeEvent<HTMLInputElement>) => {
     setModel(e.target.value);
@@ -38,7 +37,7 @@ function SearchBar(props: TSearchBarProps) {
         setResults(data);
         setLoading(false);
       } catch {
-        (error: Error) => console.log(error);
+        (error: Error) => console.error(error);
       }
     }
   };

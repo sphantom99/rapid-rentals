@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { MongoClient } from "mongodb"
 
 if (!process.env.MONGO_URI) {

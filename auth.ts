@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Github from "next-auth/providers/github";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "./lib/dbConnect";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { MongoClient } from "mongodb";
 export const { handlers, auth } = NextAuth({
+  // @ts-ignore
   adapter: MongoDBAdapter(clientPromise, {
     databaseName: "RapidRentals",
   }),

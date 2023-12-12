@@ -32,7 +32,7 @@ export function CarModel(props: TCarModelProps) {
   return (
     <Canvas
       style={{ backgroundColor: "lightgray" }}
-      camera={{ fov: 75, position: [200, 200, 200] }}
+      camera={{ fov: 75, position: [0, 200, 400] }}
     >
       <OrbitControls />
       <ambientLight />

@@ -1,0 +1,16 @@
+{
+  "name": "RapidRentals",
+  "short_name": "RapidRentals",
+  "description": "A short and simple renting demo website",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#fde047",
+  "icons": [
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

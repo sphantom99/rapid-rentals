@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="scroll-smooth" lang="en">
+    <html className="scroll-smooth overflow-x-hidden" lang="en">
       <link rel="manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/favicon-512x512.png" />
       <body className={`${inter.className} scroll-smooth`}>

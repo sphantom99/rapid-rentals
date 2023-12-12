@@ -2,12 +2,14 @@ import { auth } from "@/auth";
 import RentedCarHistory from "@/components/RentedCarHistory";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { getAllUserRentings } from "../actions";
 
 async function page() {
   const session = await auth();
   if (!session) {
     redirect("/api/auth/signin");
   }
+  const userRentings = await getAllUserRentings(session.user.id);
   return (
     <main className=" mt-28 flex  flex-col justify-center align-center items-center gap-8">
       <Image
@@ -23,7 +25,7 @@ async function page() {
           <span className="text-gray-300 text-sm">(Admin)</span>
         )}
       </h1>
-      <RentedCarHistory />
+      <RentedCarHistory rows={userRentings} />
     </main>
   );
 }

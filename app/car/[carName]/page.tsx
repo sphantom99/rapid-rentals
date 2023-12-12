@@ -2,6 +2,7 @@
 // import CarInformationCard from "@/components/CarInformationCard";
 import CarInformationCard from "@/components/CarInformationCard";
 import { CarModel } from "@/components/CarModel";
+import clientPromise from "@/lib/dbConnect";
 import { Car } from "@/lib/types";
 import { MongoClient } from "mongodb";
 import dynamic from "next/dynamic";
@@ -9,9 +10,9 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 
 async function getCarInfo(brand: string, model: string) {
+  const client = new MongoClient(process.env.MONGO_URI ?? "");
   try {
     console.log(model, brand);
-    const client = new MongoClient(process.env.MONGO_URI ?? "");
     await client.connect();
     const db = await client.db("RapidRentals");
     const cars = await db.collection<Car>("Cars");
@@ -21,6 +22,8 @@ async function getCarInfo(brand: string, model: string) {
     return result;
   } catch (error) {
     console.log(error);
+  } finally {
+    client.close();
   }
 }
 
@@ -55,7 +58,7 @@ async function page({ params }: { params: { carName: string } }) {
           Go Back
         </Link>
         <Link
-          href="/"
+          href={`/car/${params.carName}/rent`}
           className="bg-yellow-300 shadow-md text-white hover:bg-yellow-400 py-2 px-10 text-3xl rounded-lg"
         >
           Rent

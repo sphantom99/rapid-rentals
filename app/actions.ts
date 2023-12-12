@@ -1,6 +1,6 @@
 "use server";
 
-import { Car } from "@/lib/types";
+import { Car, Renting } from "@/lib/types";
 import { MongoClient } from "mongodb";
 
 export async function getAllCarBrands() {
@@ -31,6 +31,42 @@ export async function getAllCars() {
     const result = await cars.find({}).limit(5);
     const resultArray = await result.toArray();
     return resultArray;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    client.close();
+  }
+}
+
+export async function getAllUserRentings(userId: string) {
+  const client = new MongoClient(process.env.MONGO_URI ?? "");
+
+  try {
+    await client.connect();
+    const db = await client.db("RapidRentals");
+    const cars = await db.collection<Renting>("Rentings");
+    const result = await cars.find({ userId: userId });
+    const resultArray = await result.toArray();
+    return resultArray;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    client.close();
+  }
+}
+
+export async function createRenting(renting: Omit<Renting, "_id">) {
+  const client = new MongoClient(process.env.MONGO_URI ?? "");
+
+  try {
+    await client.connect();
+    const db = await client.db("RapidRentals");
+    const rentings = await db.collection<Omit<Renting, "_id">>("Rentings");
+    console.log(renting);
+    const res = await rentings.insertOne(renting);
+    console.log(res);
+
+    return res;
   } catch (error) {
     console.log(error);
   } finally {

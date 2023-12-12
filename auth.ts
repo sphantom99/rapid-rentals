@@ -10,11 +10,21 @@ export const { handlers, auth } = NextAuth({
     databaseName: "RapidRentals",
   }),
   providers: [Google, Github],
+
   callbacks: {
     session({ session, user }) {
       session.user.id = user.id;
       session.user.isAdmin = user.isAdmin;
       return session;
+    },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      console.log("urls", url, baseUrl);
+      return "http://localhost:3000";
+      // if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      //  return url;
+      // return baseUrl;
     },
   },
   events: {

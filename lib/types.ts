@@ -7,3 +7,14 @@ export type Car = {
   gears: string;
   description: string;
 };
+
+export type Renting = {
+  _id: string;
+  pickUpLocation: string;
+  pickUpDateTime: Date;
+  dropOffLocation: string;
+  dropOffDateTime: Date;
+  brand: string;
+  model: string;
+  userId: string | undefined;
+};

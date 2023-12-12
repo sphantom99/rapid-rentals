@@ -33,25 +33,33 @@ async function page({ params }: { params: { carName: string } }) {
   );
   return (
     <div className="flex flex-col justify-center items-center mt-28">
-      <Link
-        className=" ml-10  bg-gradient-to-r from-yellow-600 to-yellow-300 text-transparent bg-clip-text"
-        href="/"
-      >
-        Go Back
-      </Link>
-      <div className="flex w-full flex-wrap lg:flex-nowrap gap-8 p-1 md:p-5 justify-center items-center">
+      <div className="flex w-full flex-wrap lg:flex-nowrap gap-8 p-1 md:p-5 justify-center items-start">
         <div className=" md:w-[45%] w-[90vw] h-[50dvh]">
           <CarModel carName={params.carName} />
         </div>
         {/* <div>Car Model</div> */}
 
         {carInfo ? (
-          <div className=" w-5/6 md:w-3/6 min-h-[50dvh] max-h-[50dvh]">
+          <div className=" w-5/6 md:w-3/6 min-h-[45dvh] max-h-[45dvh]">
             <CarInformationCard car={carInfo} />
           </div>
         ) : (
           <>Loading...</>
         )}
+      </div>
+      <div className=" mt-10 flex flex-row gap-8 items-center">
+        <Link
+          className=" bg-gradient-to-r from-yellow-600 to-yellow-400 text-transparent text-2xl  bg-clip-text"
+          href="/"
+        >
+          Go Back
+        </Link>
+        <Link
+          href="/"
+          className="bg-yellow-300 shadow-md text-white hover:bg-yellow-400 py-2 px-10 text-3xl rounded-lg"
+        >
+          Rent
+        </Link>
       </div>
     </div>
   );

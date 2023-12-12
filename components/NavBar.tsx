@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Avatar from "./Avatar";
 import ScrollCar from "./ScrollCar";
+import { auth } from "@/auth";
 
 async function NavBar() {
+  const session = await auth();
+  // const isAdmin = 
   return (
     <nav className=" top-0 w-full fixed z-20 bg-white pb-4 ">
       <div className="flex flex-row w-full justify-between p-4 px-8 items-center">
@@ -13,7 +16,7 @@ async function NavBar() {
           </Link>
         </li>
         <li className="flex list-none gap-2">
-          <Avatar />
+          <Avatar session={session} />
         </li>
       </div>
     </nav>

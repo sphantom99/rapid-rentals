@@ -1,9 +1,8 @@
-import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
-import Github from "next-auth/providers/github";
-import clientPromise from "./lib/dbConnect";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import { MongoClient } from "mongodb";
+import NextAuth from "next-auth";
+import Github from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+import clientPromise from "./lib/dbConnect";
 export const { handlers, auth } = NextAuth({
   // @ts-ignore
   adapter: MongoDBAdapter(clientPromise, {
@@ -27,20 +26,18 @@ export const { handlers, auth } = NextAuth({
   },
   events: {
     createUser: async ({ user }) => {
-      const client = new MongoClient(process.env.MONGO_URI ?? "");
+      const client = await clientPromise;
       try {
         await client.connect();
 
         const db = await client.db("RapidRentals");
-        const users = db.collection("users");
-        const res = users.updateOne(
+        const users = await db.collection("users");
+        const res = await users.updateOne(
           { email: user.email },
           { $set: { isAdmin: false } }
         );
       } catch (e) {
         console.error(e);
-      } finally {
-        client.close();
       }
     },
   },

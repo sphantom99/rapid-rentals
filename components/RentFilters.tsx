@@ -44,6 +44,8 @@ function RentFilters(props: TRentFiltersProps) {
         brand: carName.split("-")[0],
         model: carName.split("-")[1],
         userId: user?.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
       const res = await createRenting(renting);
       // throw new Error("oops");

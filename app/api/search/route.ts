@@ -1,14 +1,13 @@
+import clientPromise from "@/lib/dbConnect";
 import { Car } from "@/lib/types";
-import { MongoClient } from "mongodb";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic"; // defaults to force-static
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const client = new MongoClient(process.env.MONGO_URI ?? "");
 
   try {
-    await client.connect();
+    const client = await clientPromise;
     const db = await client.db("RapidRentals");
     const cars = await db.collection<Car>("Cars");
 
@@ -32,7 +31,5 @@ export async function GET(request: Request) {
     return NextResponse.json(resultArray);
   } catch (error) {
     console.error(error);
-  } finally {
-    client.close();
   }
 }

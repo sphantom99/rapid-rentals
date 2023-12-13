@@ -4,15 +4,11 @@ import CarInformationCard from "@/components/CarInformationCard";
 import { CarModel } from "@/components/CarModel";
 import clientPromise from "@/lib/dbConnect";
 import { Car } from "@/lib/types";
-import { MongoClient } from "mongodb";
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import React, { Suspense } from "react";
 
 async function getCarInfo(brand: string, model: string) {
-  const client = new MongoClient(process.env.MONGO_URI ?? "");
   try {
-    await client.connect();
+    const client = await clientPromise;
     const db = await client.db("RapidRentals");
     const cars = await db.collection<Car>("Cars");
     const result = await cars.findOne<Car>({ model: model, brand: brand });
@@ -20,13 +16,10 @@ async function getCarInfo(brand: string, model: string) {
     return result;
   } catch (error) {
     console.error(error);
-  } finally {
-    client.close();
   }
 }
 
 async function page({ params }: { params: { carName: string } }) {
-
   const carInfo = await getCarInfo(
     params.carName.split("-")[0],
     params.carName.split("-")[1]

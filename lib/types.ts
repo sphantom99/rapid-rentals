@@ -17,4 +17,6 @@ export type Renting = {
   brand: string;
   model: string;
   userId: string | undefined;
+  createdAt: Date;
+  updatedAt: Date;
 };
